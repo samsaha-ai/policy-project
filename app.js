@@ -77,17 +77,19 @@ function footer() {
   `;
 }
 
-const activeRiskMapEmbedSrc = "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d45154950.62760197!2d-70.61867875284214!3d32.781151017937226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1780262216597!5m2!1sen!2sus";
+const activeRiskMapEmbedSrc = "https://war-monitor.com/dashboard";
 
-function earthMapReference(label = "Google Earth nighttime satellite reference", src = "https://earth.google.com/web/?hl=en_US", linkLabel = "Open Google Earth →", extraClass = "") {
+function earthMapReference(label = "War Monitor active conflict map reference", src = "https://war-monitor.com/dashboard", linkLabel = "Open War Monitor →", extraClass = "") {
   return `
-    <div class="earth-map-shell ${extraClass}" aria-label="${label}">
-      <iframe src="${src}" title="${label}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <div class="earth-map-fallback">
-        <span>${label}</span>
-        <a href="${src}" target="_blank" rel="noreferrer">${linkLabel}</a>
-      </div>
-    </div>
+    <div style="position: relative; width: 100%; height: 600px; overflow: hidden;">
+  <iframe src="https://war-monitor.com/" 
+          width="100%"  	
+          height="100%" 
+          frameborder="0" 
+          allowfullscreen 
+          style="position: absolute; top: 0; left: 0;">
+  </iframe>
+	</div>
   `;
 }
 
@@ -1455,13 +1457,11 @@ function riskWorldMap() {
 
   return `
     <div class="world-risk-wrap">
-    <iframe>
-      ${earthMapReference("Google Maps active risk map reference", activeRiskMapEmbedSrc, "Open active risk map →", "active-risk-map-embed")}
+      ${earthMapReference("War Monitor active risk map reference", activeRiskMapEmbedSrc, "Open active risk map →", "active-risk-map-embed")}
       <svg class="world-risk-map" viewBox="0 0 1000 560" role="img" aria-label="Global geopolitical risk map">
         ${landMasses.map((points) => `<path class="map-land" d="${geoPath(points)}"></path>`).join("")}
         ${highlighted.map(([name, tier, note, points]) => `<path class="risk-country" data-name="${name}" data-tier="${tier}" data-note="${note}" style="fill:${riskTierColors[tier]}" d="${geoPath(points)}"></path>`).join("")}
       </svg>
-    </iframe>
       <div class="map-tooltip" id="map-tooltip" role="status" aria-live="polite"></div>
     </div>
   `;
