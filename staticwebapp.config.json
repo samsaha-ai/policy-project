@@ -1,6 +1,6 @@
 {
   "globalHeaders": {
-    "Access-Control-Allow-Origin": "https://www.google.com/maps/?",
+    "Access-Control-Allow-Origin": "https://earth.google.com/web/?hl=en_US",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS,FETCH",
     "Access-Control-Allow-Headers": "Content-Type, Authorization"
   }
