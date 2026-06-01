@@ -1455,7 +1455,7 @@ function riskWorldMap() {
 
   return `
     <div class="world-risk-wrap">
-    <iframe
+    <iframe>
       ${earthMapReference("Google Maps active risk map reference", activeRiskMapEmbedSrc, "Open active risk map →", "active-risk-map-embed")}
       <svg class="world-risk-map" viewBox="0 0 1000 560" role="img" aria-label="Global geopolitical risk map">
         ${landMasses.map((points) => `<path class="map-land" d="${geoPath(points)}"></path>`).join("")}
