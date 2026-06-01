@@ -1461,9 +1461,9 @@ function riskWorldMap() {
         ${landMasses.map((points) => `<path class="map-land" d="${geoPath(points)}"></path>`).join("")}
         ${highlighted.map(([name, tier, note, points]) => `<path class="risk-country" data-name="${name}" data-tier="${tier}" data-note="${note}" style="fill:${riskTierColors[tier]}" d="${geoPath(points)}"></path>`).join("")}
       </svg>
+    </iframe>
       <div class="map-tooltip" id="map-tooltip" role="status" aria-live="polite"></div>
     </div>
-    </iframe>
   `;
 }
 
