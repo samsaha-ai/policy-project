@@ -86,7 +86,8 @@ function earthMapReference(label = "War Monitor active conflict map reference", 
           width="100%"  	
           height="100%" 
           frameborder="0" 
-          allowfullscreen 
+          allowfullscreen =""
+		  Content-Security-Policy= "frame-ancestors 'self'"
           style="position: absolute; top: 0; left: 0;">
   </iframe>
 	</div>
@@ -96,22 +97,59 @@ function earthMapReference(label = "War Monitor active conflict map reference", 
 function smallWorldMap() {
   return `
     ${earthMapReference("Google Earth nighttime satellite reference for geopolitical risk tiers")}
-    <svg class="risk-map-small" viewBox="0 0 960 440" role="img" aria-label="Geopolitical risk tier map">
-      <path class="map-land" d="M92 118 L126 84 L183 72 L232 93 L276 122 L304 168 L282 215 L229 224 L205 262 L168 253 L139 214 L104 190 Z"></path>
-      <path class="map-land" d="M268 252 L306 276 L338 331 L326 392 L286 421 L250 376 L232 312 Z"></path>
-      <path class="map-land" d="M406 111 L487 78 L598 78 L711 99 L827 118 L886 161 L835 200 L705 189 L633 226 L532 201 L442 216 L383 173 Z"></path>
-      <path class="map-land" d="M470 223 L526 208 L578 244 L599 310 L566 378 L506 384 L462 330 L438 266 Z"></path>
-      <path class="map-land" d="M728 302 L794 285 L849 319 L842 366 L770 374 Z"></path>
-      <path class="map-highlight" opacity="0.92" d="M602 137 L647 123 L686 138 L690 176 L646 191 L608 171 Z"></path>
-      <path class="map-highlight" opacity="0.74" d="M492 146 L538 124 L619 118 L610 159 L548 176 L499 169 Z"></path>
-      <path class="map-highlight" opacity="0.62" d="M315 135 L355 128 L373 157 L348 185 L307 171 Z"></path>
-      <path class="map-highlight" opacity="0.48" d="M559 201 L581 205 L590 228 L571 244 L551 229 Z"></path>
-      <path class="map-highlight" opacity="0.36" d="M244 304 L277 294 L296 328 L281 368 L252 344 Z"></path>
-      <path class="map-highlight" opacity="0.26" d="M433 245 L471 237 L497 261 L486 299 L446 291 Z"></path>
-      <g class="chart-axis">
-        <text x="35" y="410">Tier opacity indicates intensity of geoeconomic risk exposure.</text>
-      </g>
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+   <defs>
+      <filter id="glow">
+         <feGaussianBlur stdDeviation="12" result="b"/>
+         <feMerge>
+            <feMergeNode in="b"/>
+            <feMergeNode in="SourceGraphic"/>
+         </feMerge>
+      </filter>
+      <style>
+         .ocean{fill:#02044f;}
+         .land{fill:#1a1c27;stroke:#2d3144;stroke-width:2;}
+         .risk{fill:#d9b44a;stroke:#f0cc5c;stroke-width:1.5;filter:url(#glow);}
+         .label{fill:#f0cc5c;font:700 20px Arial;}
+         .sub{fill:white;font:18px Arial;}
+      </style>
+   </defs>
+   <rect class="ocean" width="1600" height="900"/>
+   <!-- simplified continents -->
+   <path class="land" d="M90 120 L180 90 L260 110 L340 170 L390 260 L350 340 L240 360 L190 430 L120 415 L70 345 Z"/>
+   <path class="land" d="M320 410 L390 460 L450 560 L425 690 L350 760 L280 640 L250 510 Z"/>
+   <path class="land" d="M730 110 L880 60 L1090 60 L1310 100 L1500 130 L1570 190 L1510 240 L1360 230 L1210 220 L1110 270 L960 240 L800 270 L690 210 Z"/>
+   <path class="land" d="M820 270 L960 240 L1050 300 L1090 460 L1030 590 L900 600 L820 500 L780 370 Z"/>
+   <path class="land" d="M1320 450 L1430 420 L1540 490 L1530 570 L1400 585 Z"/>
+   <!-- Russia-Ukraine -->
+   <ellipse class="risk" cx="1050" cy="250" rx="140" ry="80" opacity="0.85"/>
+   <!-- Israel/Gaza -->
+   <circle class="risk" cx="900" cy="360" r="28" opacity="0.9"/>
+   <!-- Syria -->
+   <circle class="risk" cx="875" cy="345" r="24" opacity="0.65"/>
+   <!-- Sudan -->
+   <circle class="risk" cx="860" cy="500" r="65" opacity="0.75"/>
+   <!-- Yemen -->
+   <circle class="risk" cx="980" cy="470" r="42" opacity="0.60"/>
+   <!-- Red Sea -->
+   <ellipse class="risk" cx="940" cy="430" rx="22" ry="90" opacity="0.55"/>
+   <!-- Sahel -->
+   <ellipse class="risk" cx="770" cy="450" rx="120" ry="55" opacity="0.50"/>
+   <!-- Myanmar -->
+   <circle class="risk" cx="1260" cy="470" r="35" opacity="0.80"/>
+   <text x="980" y="220" class="label">RUSSIA–UKRAINE WAR</text>
+   <text x="980" y="245" class="sub">Energy ↑</text>
+   <text x="805" y="338" class="label">SYRIA</text>
+   <text x="820" y="375" class="label">ISRAEL–HAMAS</text>
+   <text x="700" y="500" class="label">SUDAN CIVIL WAR</text>
+   <text x="1010" y="520" class="label">YEMEN</text>
+   <text x="970" y="610" class="label">RED SEA CRISIS</text>
+   <text x="600" y="430" class="label">SAHEL</text>
+   <text x="1310" y="475" class="label">MYANMAR</text>
+   <text x="40" y="860" fill="#8a8fa8" font-size="24">
+      Tier opacity indicates intensity of geoeconomic risk exposure.
+   </text>
+</svg>
     <div class="map-legend">
       <span><i class="legend-dot" style="opacity:.92"></i>Systemic sanctions risk</span>
       <span><i class="legend-dot" style="opacity:.62"></i>Supply-chain exposure</span>
